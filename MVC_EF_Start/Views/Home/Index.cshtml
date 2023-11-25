@@ -58,20 +58,16 @@
 <body>
     @if (TempData["AlertMessage"] != null)
     {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <script>
+            alert('@TempData["AlertMessage"]');
 
-            <strong>Alert:</strong> @TempData["AlertMessage"]
-
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times; Close The Alert</span>
-            </button>
-        </div>
+        </script>
     }
 
     <!-- Header -->
     <header>
         <!-- Add logo with size of 150*150 -->
-        <a href="index.html">
+        <a href="/Home/Index">
             <img src="~/img/logo1.jpeg" width="120" height="120" alt="">
         </a>
         <h1 class="text-center automargin">ALTERNATIVE FUELING STATION LOCATOR</h1>
@@ -85,17 +81,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a href="index.html" class="nav-link">
+                        <a href="/Home/Index" class="nav-link">
                             <i class="fas fa-home px-md-2 px-1"></i> Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="Search.html" class="nav-link">
+                        <a href="/Search.html" class="nav-link">
                             <i class="fas fa-search px-md-2 px-1"></i> Search
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.html" class="nav-link">
+                        <a href="/about.html" class="nav-link">
                             <i class="fas fa-info-circle px-md-2 px-1"></i> About Us
                         </a>
                     </li>

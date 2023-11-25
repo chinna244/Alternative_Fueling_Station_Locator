@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var button = document.getElementById("start-button");
     button.addEventListener("click", function () {
       // Redirect to the search page
-      window.location.href = "Search.html";
+      window.location.href = "/Search.html";
     });
   });
   
@@ -230,8 +230,7 @@ function deleteStation(stationId) {
         success: function (response) {
             if (response.success) {
                 alert("Station Deleted Successfully!")
-
-                window.location.href = 'index.html';
+                window.location.href = '/Home/Index';
 
             } else {
                 // Handle failure
