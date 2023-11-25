@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  
+    <style>
+    body {
+    background: linear-gradient(135deg, #2980B9, #6DD5FA, #ffffff, #FA7E6D, #FFC300);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} 
+
+/* Media query for screen widths between 320px and 480px */
+@media (max-width: 480px) {
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .station {
+      width: 90%; /* Adjust the width to your preference */
+    }
+  }
+  @media (min-width: 480px) and (max-width: 768px) {
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-body {
+    width: 100%;
+  }
+  .station {
+    width: 40%;
+  }
+}
+@media (min-width:769px) and (max-width: 1120px) {
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-body{
+	  width:100%;
+}
+.station{
+	width:45%;
+}
+}
+    </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="img/logo1.jpeg" width="120" height="120" alt="">
+    </a>
+    <h1 class="text-center automargin">ALTERNATIVE FUELING STATION LOCATOR</h1>
+  </header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0" id="navbarResponsive">
+    <div class="container-fluid" style="margin-left: 0px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home px-md-2 px-1"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="Search.html" class="nav-link">
+                        <i class="fas fa-search px-md-2 px-1"></i> Search
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle px-md-2 px-1"></i> About Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+  <main>
+      <form id="search-form" style="padding: 10px;">
+          <div class="form-group">
+              <label for="location" style="font-weight: bold;"><h4><strong>Location:</strong></h4></label>
+              <input type="text" id="location" name="location" class="form-control smaller-input" placeholder="Enter your Location or zip code">
+          </div>
+          <div class="form-group smaller-input">
+              <label for="fuel-type" style="font-weight: bold;"><h4><strong>Fuel Type:</strong></h4></label>
+              <select id="fuel-type" name="fuel-type" class="form-control">
+                  <option value="ALL">All</option>
+                  <option value="BD">Biodiesel (B20 and above)</option>
+                  <option value="ELEC">Electric</option>
+                  <option value="E85">Ethanol (E85)</option>
+                  <option value="HY">Hydrogen</option>
+                  <option value="CNG">Natural Gas (CNG)</option>
+                  <option value="LNG">Natural Gas (LNG)</option>
+                  <option value="LPG">Propane (LPG)</option>
+              </select>
+          </div>
+          <button id="submit-button" type="submit" class="btn btn-secondary">
+              <i class="fas fa-search px-md-2 px-1"></i>Search
+          </button>
+      </form>
+      <br>
+      <p>Would you like to submit a new station? <a href="/Home/Create" class="btn btn-primary">Submit a New Station</a></p>
+
+      <section id="search-results" class="card-container">
+          <!-- Result cards will be dynamically added here using JavaScript -->
+
+      </section>
+  </main>
+  <script src="js/search_Script.js"></script>
+</body>
+</html>

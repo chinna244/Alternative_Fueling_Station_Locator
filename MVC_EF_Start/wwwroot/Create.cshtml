@@ -1,0 +1,155 @@
+﻿@model MVC_EF_Start.Models.Stations
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<head>
+    <title>Submit New Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+            input[type=checkbox] {
+                width: auto;
+            }
+
+        .required {
+            color: red;
+        }
+
+        .submit {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+            .submit input {
+                width: auto;
+                padding: 10px 20px;
+                background-color: green;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="img/logo1.jpeg" width="120" height="120" alt="">
+        </a>
+        <h1 class="text-center automargin">ALTERNATIVE FUELING STATION LOCATOR</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0" id="navbarResponsive">
+        <div class="container-fluid" style="margin-left: 0px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home px-md-2 px-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Search.html" class="nav-link">
+                            <i class="fas fa-search px-md-2 px-1"></i> Search
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle px-md-2 px-1"></i> About Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <h1>Submit New Station</h1>
+    <p class="text-center">Use this form to suggest adding a station.</p>
+    <form asp-controller="Home" asp-action="Create" method="post">
+        <fieldset>
+            <legend>Station Information</legend>
+            <label for="station-name">Station Name <span class="required">*</span></label>
+            <input type="text" asp-for="station" id="station-name" name="station-name" required>
+            <fieldset>
+                <legend>Available Fuel(s) <span class="required">*</span></legend>
+                <select id="fuelType" name="fuelType">
+                    <option value="BD">Biodiesel</option>
+                    <option value="ELEC">Electric</option>
+                    <option value="CNG">Compressed Natural Gas (CNG)</option>
+                    <option value="RD">Regular Diesel</option>
+                    <option value="HY">Hydrogen</option>
+                    <option value="E85">Ethanol (E85)</option>
+                    <option value="LPG">Liquefied Petroleum Gas (LPG)</option>
+                    <option value="LNG">Liquefied Natural Gas (LNG)</option>
+                </select>
+            </fieldset>
+
+            <label for="country">Country <span class="required">*</span></label>
+            <select id="country" name="country" required>
+                <option value="">Select a country</option>
+                <option value="USA">United States</option>
+            </select>
+            <label for="address">Address <span class="required">*</span></label>
+            <input type="text" id="address" name="address" required>
+            <label for="city">City <span class="required">*</span></label>
+            <input type="text" id="city" name="city" required>
+            <label for="state">State <span class="required">*</span></label>
+            <input type="text" id="state" name="state" required>
+            <label for="postal-code">Postal Code <span class="required">*</span></label>
+            <input type="text" id="postal-code" name="postal-code" required>
+
+        </fieldset>
+
+        <div>
+            <button id="submit-button" type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+
+    </form>
+</body>
+</html>
+
+
+

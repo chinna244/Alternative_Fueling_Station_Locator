@@ -1,0 +1,295 @@
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 20;
+ 
+  }
+  
+  /* Set a background color for the body */
+  body {
+    background: linear-gradient(135deg, #2980B9, #6DD5FA, #ffffff, #FA7E6D, #FFC300);
+    font-family: "Times New Roman",Times,'Roboto', sans-serif;
+  }
+
+    /* Style for the header */
+    header {
+        background-color: #016129 !important; /* Background color for the header */
+        padding: 20px 2rem; /* Adjust the padding */
+        text-align: center !important;
+        background-repeat: no-repeat;
+        display: flex; 
+        flex-direction: row;
+        align-items: center;
+      }
+
+      /* Style for the logo image */
+      .header img {
+        margin-top: 0 !important;       
+      }
+
+      /* Add a specific CSS rule for the header text */
+    header h1 {
+    font-weight: bold;
+    }
+
+      /* Style for the header title */
+      .header h1 {
+        font-size: 20px;
+        color: #e2cfcf;
+        margin:auto;
+        padding: 10px;
+        font-weight: bold !important;
+        text-align: center !important;
+      }
+      .automargin{
+        margin:auto;
+      }
+
+  /* Style the header and navigation bar */
+  .navbar {
+    background-color: #000000 !important; /* !important ensures the style is applied */
+    color: #ffffff;
+    padding: 20px 20px;
+    
+    
+  }
+  .nav-item.active {
+    background-color: crimson; /* Highlight color for the active item */
+    color: #fff; /* Text color for the active item */
+    border-radius: 6px; /* Adjust the radius value as needed */
+}
+  .nav-link {
+    color: #ffffff !important; /* !important ensures the style is applied */
+    margin-right: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #FA9A85  !important;
+  }
+  /* Style the logo in the center of the header */
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: crimson !important; /* !important ensures the style is applied */
+  }
+  
+  /* Style the main section */
+  main {
+    padding: 20px;
+  }
+  
+  /* Style page titles */
+  h1, h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  /* Style paragraphs */
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  /* Style buttons */
+  .btn {
+    background-color: #020202;
+    color: #fff;
+    margin-left: 1em;
+   /* padding: 10px 20px;*/
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn:hover {
+    background-color: crimson;
+  }
+  
+  /* Add a little spacing between sections */
+  section {
+    margin: 20px 0;
+  }
+  
+  /* Center the content horizontally within the center-horizontal */
+  .center-horizontal {
+    text-align: center;
+  }
+  
+  /* Style for container */
+  .container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+/* Add this style rule for the header */
+header {
+    background-color: #6DD5FA !important; /* Background color for the header  #FA7E6D #FFC300 #6DD5FA #A2CCCA #FA9A85*/
+    padding: 20px 2rem; /* Adjust the padding as needed */
+  }
+  
+  /* Add this style to control the image and info container heights */
+.info-container, .main-info {
+    height: 100%;
+  }
+  
+  /* Add this style to control the image's dimensions */
+  .info-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adjust object-fit as needed (e.g., cover, contain) */
+  }
+  .smaller-input {
+    width: 250px; /* Adjust the width as needed */
+}
+ /* Add this CSS for styling the cards */
+.card {
+    margin: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /*align-items: flex-start; /* This aligns the cards neatly at the top */
+  }
+  
+  .station {
+    width: 30%; /* Adjust this width based on your design */
+    margin: 1 1 1 1; /* Adjust margins as needed */
+    background-color: rgb(214, 214, 214);
+    border: 1px solid #ccc;
+    margin-right: 20px;
+  }
+  
+  .station .card {
+    width: 100%;
+    padding: 1rem;
+    margin-right: 30px;
+    background-color: rgb(214, 214, 214);
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  /* Media query for search results-  smaller screens */
+
+/* Media query for screen widths between 320px and 480px */
+  @media (max-width: 480px) {
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .card-body {
+      width: 100%;
+    }
+    .station {
+      width: 80%; /* Adjust the width to your preference */
+    
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .card-body {
+      width: 100%;
+    }
+    .station {
+      width: 50%;
+    }
+  }
+@media (min-width: 769px) and (max-width: 1120px) {
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-body{
+	  width:100%;
+}
+.station{
+	width:45%;
+}
+}
+/* background color for chart */
+#stateStationsChart {
+  background-color: #ffffff; /* Set your desired background color here */
+}
+
+  /* Additional styles for your specific content can be added below */
+   
+  /* header changes by Rakshak*/
+  h1.text-center.automargin {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 36px;
+}
+
+@media (max-width: 760px) {
+    .row {
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .column {
+        width: 100%;
+    }
+    .profile_name,
+    .info-text,
+    .info-email {
+        text-align: center;
+    }
+    h1.text-center.automargin {
+        font-size:smaller; /* Adjust font size for smaller screens */
+    }
+    header img {
+        width: 80px; /* Adjust width for smaller screens */
+        height: 80px; /* Adjust height for smaller screens */
+    }
+}
+
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px; /* Adjust the max-width as needed for your design */
+  }
+}
+
+/* Styles for medium-sized screens */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px; /* Adjust the max-width as needed for your design */
+  }
+}
+
+/* Styles for smaller screens */
+@media (max-width: 576px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* Adjust the width of the dropdown column for smaller screens */
+  #fuelTypeSelect {
+    width: 100%;
+  }
+
+  /* Adjust the width of the state stations chart for smaller screens */
+  #stateStationsChart {
+    max-width: 100%;
+  }
+}
+/*rakshak changes end*/

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
+
 
 namespace MVC_EF_Start.Models
 {
@@ -36,5 +38,26 @@ namespace MVC_EF_Start.Models
     public class ChartRoot
     {
         public Quote[] chart { get; set; }
+    }
+    public class Stations
+    {
+        [Key]
+        public int station_id { get; set; }
+        public string station_name { get; set; }
+        public string? station_phone { get; set; }
+        public string? street_address { get; set; }
+        public string? city { get; set; }
+        public string? state { get; set; }
+        public string? country { get; set; }
+        public string? zip { get; set; }
+        public string? latitude { get; set; }
+        public string? longitude { get; set; }
+        public string? fuel_type_code { get; set; }
+        public DateTime Date_Updated { get; set; }
+    }
+
+    public class station_details
+    {
+        public List<Stations> Stations { get; set; }
     }
 }

@@ -1,15 +1,214 @@
-﻿@{
+﻿@model MVC_EF_Start.Models.station_details
+@{
     Layout = null;
 }
+@*@{
+        if (TempData["AlertMessage"] != null)
+        {
+            <script>
+            alert('@TempData["AlertMessage"]');
+
+            </script>
+        }
+    }*@
+
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Alternative Fueling Stations Locator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="This website helps you find alternative fuel stations near your location or along a route">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css"> <!-- Link to your external CSS file -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function deleteStation(stationId) {
+
+            $.ajax({
+                url: "/Home/DeleteStation",
+                type: "POST",
+                data: { id: stationId },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        alert("Station Deleted Successfully!")
+
+                        window.location.href = '/Home/Index';
+
+                    } else {
+                        // Handle failure
+                        alert("Station deletion failed.");
+                    }
+                },
+                error: function (error) {
+                    alert("Station deletion failed.");
+                    // Handle errors
+                }
+            });
+        }
+    </script>
 </head>
 <body>
-  <h2>Hello World!</h2>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+
+            <strong>Alert:</strong> @TempData["AlertMessage"]
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times; Close The Alert</span>
+            </button>
+        </div>
+    }
+
+    <!-- Header -->
+    <header>
+        <!-- Add logo with size of 150*150 -->
+        <a href="index.html">
+            <img src="~/img/logo1.jpeg" width="120" height="120" alt="">
+        </a>
+        <h1 class="text-center automargin">ALTERNATIVE FUELING STATION LOCATOR</h1>
+    </header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0" id="navbarResponsive">
+        <div class="container-fluid" style="margin-left: 0px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home px-md-2 px-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Search.html" class="nav-link">
+                            <i class="fas fa-search px-md-2 px-1"></i> Search
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle px-md-2 px-1"></i> About Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container-fluid" style="margin-left: 0%;">
+            <div class="row">
+                <div class="col-md-4 info-container">
+                    <!-- Image on the left -->
+                    <img src="~/img/logo.jpeg" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8 main-info">
+                    <!-- Information on the right -->
+                    <h2>Welcome to Alternative Fueling Station Locator</h2>
+                    <p style="text-align: justify;">This is a website that helps users find alternative fueling stations in the United States.</p>
+                    <p style="text-align: justify;">Locate stations that offer different types of alternative fuels for your vehicle.</p>
+                    <p style="text-align: justify;">You can choose from different fuel types such as biodiesel, electric, ethanol, hydrogen, natural gas, and propane.</p>
+                    <p style="text-align: justify;"> You can also get information such as the station name, address, access times, etc.</p>
+                    <p style="text-align: justify;"> The Alternative Fueling Station Locator website is getting data from the Alternative Fuel Stations API, which is developed by the U.S. Department of Energy Alternative Fuels Data Center.</p>
+                    <p style="text-align: justify;">This API allows you to query their database of alternative fuel stations in the United States. You can use different parameters to filter and sort the stations by location, fuel type.</p>
+                    <p style="text-align: justify;">
+                        Here is the link to the API:<a href="https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/"> Alternative Fuel Stations.</a>
+                        You can find more information and documentation about this API on the Data.gov
+                    </p>
+                    <label for="start-button">Click here to start searching:</label>
+                    <button id="start-button" type="button" class="btn btn-secondary">
+                        Start Searching<i class="fas fa-search px-md-2 px-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="container-fluid bg-white text-center" style="margin-top:auto;">
+            <div class="card-body">
+                <h2 class="mb-4">Latest Created & Updated Fuel Stations</h2>
+
+                <table class="table">
+                    <thead>
+                        <tr style="color:cadetblue;">
+                            <th>NAME</th>
+                            <th>PHONE</th>
+                            <th>CITY</th>
+                            <th>STATE</th>
+                            <th>ZIP CODE</th>
+                            <th>FUEL TYPE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var station in Model.Stations)
+                        {
+                            <tr>
+                                <td style="text-transform: uppercase; font-size: smaller;">@station.station_name</td>
+                                <td>@station.station_phone</td>
+                                <td>@station.city</td>
+                                <td>@station.state</td>
+                                <td>@station.zip</td>
+                                <td>@station.fuel_type_code</td>
+
+                                <td>
+                                    <a href="@Url.Action("Edit", "Home", new { id = station.station_id })" class="btn btn-primary"> Edit </a>
+                                    <button class="btn btn-danger" onclick="deleteStation(@station.station_id)">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Fuel Stations by State</h5>
+                        <label for="fuelTypeSelect">Select Fuel Type:</label>
+                        <select id="fuelTypeSelect" class="form-select">
+                            <option value="all">All Fuels</option>
+                            <option value="BD">Biodiesel (B20 and above)</option>
+                            <option value="CNG">Compressed Natural Gas (CNG)</option>
+                            <option value="ELEC">Electric</option>
+                            <option value="E85">Ethanol (E85)</option>
+                            <option value="HY">Hydrogen</option>
+                            <option value="LNG">Liquefied Natural Gas (LNG)</option>
+                            <option value="LPG">Propane (LPG)</option>
+                            <option value="RD">Renewable Diesel (R20 and above)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="chart-loading" class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Loading the chart...
+                        </div>
+                        <canvas id="stateStationsChart" class="chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <!-- Link to your external JavaScript file -->
 </body>
 </html>

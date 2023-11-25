@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+  <title>Details Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Add your CSS styles here */
+    .station-info-container {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .station-card {
+      display: inline-block;
+      width: 30%;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    /* Clear the right margin of the last card in a row */
+    .station-card:nth-child(3n) {
+      margin-right: 1em;
+    }
+    body {
+   /* background-image: url('img/logo2.jpeg');*/
+   background: linear-gradient(135deg, #2980B9, #6DD5FA, #ffffff, #FA7E6D, #FFC300);
+   background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} 
+@media (max-width: 768px) {
+  .station-info-container {
+    flex-direction: column;
+  }
+  .station-card{
+	  width:100%;
+}
+.station-card:nth-child(3n){
+	width:100%;
+}
+ 
+/* header changes by Rakshak*/
+h1.text-center.automargin {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 36px;
+}
+
+@media (max-width: 760px) {
+    .row {
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .column {
+        width: 100%;
+    }
+    .profile_name,
+    .info-text,
+    .info-email {
+        text-align: center;
+    }
+    h1.text-center.automargin {
+        font-size:smaller; /* Adjust font size for smaller screens */
+    }
+    header img {
+        width: 80px; /* Adjust width for smaller screens */
+        height: 80px; /* Adjust height for smaller screens */
+    }
+}
+/*rakshak changes end*/
+
+}
+  </style>
+</head>
+<header>
+  <!-- Add your header code here --> <a href="index.html">
+    <img src="img/logo1.jpeg" width="120" height="120" alt="">
+  </a>
+  <h1 class="text-center automargin">ALTERNATIVE FUELING STATION LOCATOR</h1>
+</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0" id="navbarResponsive">
+  <div class="container-fluid" style="margin-left: 0px;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a href="index.html" class="nav-link">
+                      <i class="fas fa-home px-md-2 px-1"></i> Home
+                  </a>
+              </li>
+              <li class="nav-item active">
+                  <a href="Search.html" class="nav-link">
+                      <i class="fas fa-search px-md-2 px-1"></i> Search
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="about.html" class="nav-link">
+                      <i class="fas fa-info-circle px-md-2 px-1"></i> About Us
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<body>
+  <main>
+    <section id="station-info">
+      <div class="container">
+        <!-- Add your station information code here -->
+      </div>
+    </section>
+    <section id="nearby-stations">
+      
+      <div id="stations-list">
+        <!-- This is where the list of stations will be added -->
+      </div>
+    </section>
+  </main>
+  <script>
+    var info = document.getElementById("station-info");
+    var nearby = document.getElementById("stations-list");
+    var apiKey = "hkZVQijE8ZvMpchuICzQYDI8gIyPjxVsGzt9h0oI"; // Replace with your API key
+    var apiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1/"; // Base URL for the API
+    var stationId = window.location.search.split("=")[1]; // Get the station id from the URL query string
+    var latitude = "";
+    var longitude = "";
+
+    if (stationId) {
+      // Station id exists
+      // Build the API request URL for getting the station details
+      var detailUrl = apiUrl + stationId + ".json?api_key=" + apiKey;
+
+      // Send the API request using XMLHttpRequest
+      var xhr1 = new XMLHttpRequest();
+      xhr1.open("GET", detailUrl);
+      xhr1.onload = function () {
+        if (xhr1.status == 200) {
+          // Request successful
+          var response = JSON.parse(xhr1.responseText); // Parse the response data as JSON
+          var station = response.alt_fuel_station; // Get the station object
+          latitude = station.latitude;
+          longitude = station.longitude;
+
+          function generateHTML(station) {
+            // Initialize an empty string to store the HTML code
+            var html = "<h2><strong>Station Information</strong></h2>";
+            // Loop over the station object
+            for (var key in station) {
+              // Check if the station object has the key as its own property and the value is not null
+              if (station.hasOwnProperty(key) && station[key] != null) {
+                // Get the value of the key
+                var value = station[key];
+                // Check if the value is an array
+                if (Array.isArray(value)) {
+                  // Join the array elements with commas
+                  value = value.join(", ");
+                }
+                // Add the key and value pair to the HTML code as a paragraph element
+                html += "<p><strong>" + key + ":<strong> " + value + "</p>";
+              }
+            }
+            // Return the HTML code
+            return html;
+          }
+
+          // Create a container div for station info
+          var stationInfoContainer = document.createElement("div");
+          stationInfoContainer.className = "station-info-container";
+          stationInfoContainer.innerHTML = generateHTML(station);
+
+          // Add the station information container to the section element
+          info.appendChild(stationInfoContainer);
+        } else {
+          // Request failed
+          info.innerHTML = "<p>Sorry, something went wrong. Please try again later.</p>";
+        }
+
+        // Send the API request for nearby stations
+        var nearbyUrl = apiUrl + "nearest.json?api_key=" + apiKey + "&latitude=" + latitude + "&longitude=" + longitude;
+
+        // Send the API request using XMLHttpRequest
+        var xhr3 = new XMLHttpRequest();
+        xhr3.open("GET", nearbyUrl);
+        xhr3.onload = function () {
+          if (xhr3.status == 200) {
+            // Request successful
+            var response = JSON.parse(xhr3.responseText); // Parse the response data as JSON
+            var nearbyStations = response.fuel_stations; // Get the array of nearby stations
+
+            function generateNearbyStationsHTML(nearbyStations) {
+              // Initialize an empty string to store the HTML code
+              var html = "<h2><strong>Nearby Stations</strong></h2>";
+              // Loop over the nearby stations array
+              nearbyStations.forEach(function (station) {
+                // Create a station card for each nearby station
+                html += '<div class="station-card">';
+                html += "<h3>" + station.station_name + "</h3>";
+                html += "<p>Address: " + station.street_address + "</p>";
+                html += "<p>City: " + station.city + "</p>";
+                html += "<p>State: " + station.state + "</p>";
+                html += "<p>ZIP: " + station.zip + "</p>";
+                html += "<p>Phone: " + station.station_phone + "</p>";
+                html +=
+                  "<p>Distance: " + station.distance.toFixed(2) + " miles</p>";
+                html += "</div>";
+              });
+              // Return the HTML code
+              return html;
+            }
+
+            // Add the nearby stations information to the section element
+            nearby.innerHTML = generateNearbyStationsHTML(nearbyStations);
+          } else {
+            // Request failed
+            nearby.innerHTML =
+              "<p>Sorry, something went wrong while fetching nearby stations.</p>";
+          }
+        };
+        xhr3.send();
+      };
+      xhr1.send();
+    } else {
+      // Station id does not exist
+      info.innerHTML =
+        "<p>No station id provided. Please go back to the search page and select a station.</p>";
+    }
+  </script>
+</body>
+</html>

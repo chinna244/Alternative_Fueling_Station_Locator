@@ -29,7 +29,7 @@ namespace MVC_EF_Start.Controllers
             Company MyCompany = new Company();
             MyCompany.Id = "MCOB";
             MyCompany.name = "ISM";
-            MyCompany.date = "ISM";
+            MyCompany.date = "11-14-2023";
             MyCompany.isEnabled = true;
             MyCompany.type = "ISM";
             MyCompany.iexId = "ISM";
@@ -87,8 +87,8 @@ namespace MVC_EF_Start.Controllers
             await dbContext.SaveChangesAsync();
 
             // DELETE operation
-            dbContext.Companies.Remove(CompanyRead1);
-            await dbContext.SaveChangesAsync();
+           // dbContext.Companies.Remove(CompanyRead1);
+            //await dbContext.SaveChangesAsync();
 
             return View();
         }
