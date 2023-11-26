@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Microsoft.VisualBasic.FileIO;
 
 
 namespace MVC_EF_Start.Models
@@ -59,5 +60,13 @@ namespace MVC_EF_Start.Models
     public class station_details
     {
         public List<Stations> Stations { get; set; }
+        public List<FuelType> FuelTypes { get; set; }
+
     }
-}
+        public class FuelType
+        {
+            public string Code { get; set; }
+            public string Name { get; set; }
+        }
+
+    }

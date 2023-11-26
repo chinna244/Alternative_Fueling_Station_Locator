@@ -153,10 +153,11 @@ namespace MVC_EF_Start.Controllers
         {
             station_details Stations_latest = new station_details();
             Stations_latest.Stations = dbContext.Fuel_Stations
-    
                 .OrderByDescending(s => s.Date_Updated)
                 .Take(10)
                 .ToList();
+ 
+
             return View(Stations_latest);
 
         }
@@ -221,6 +222,14 @@ namespace MVC_EF_Start.Controllers
             Regex regex = new Regex(pattern);
 
             return regex.IsMatch(zipCode);
+        }
+        [HttpGet]
+        public ActionResult Station_Details()
+        {
+            station_details Stations_latest = new station_details();
+            Stations_latest.Stations = dbContext.Fuel_Stations
+                .ToList();
+            return Json(new { stations = Stations_latest });
         }
 
     }
