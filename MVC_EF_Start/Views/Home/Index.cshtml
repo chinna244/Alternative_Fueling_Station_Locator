@@ -174,17 +174,13 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Fuel Stations by State</h5>
-                        <label for="fuelTypeSelect">Select Fuel Type:</label>
-                        <select id="fuelTypeSelect" class="form-select">
-                            <option value="all">All Fuels</option>
-                            <option value="BD">Biodiesel (B20 and above)</option>
-                            <option value="CNG">Compressed Natural Gas (CNG)</option>
-                            <option value="ELEC">Electric</option>
-                            <option value="E85">Ethanol (E85)</option>
-                            <option value="HY">Hydrogen</option>
-                            <option value="LNG">Liquefied Natural Gas (LNG)</option>
-                            <option value="LPG">Propane (LPG)</option>
-                            <option value="RD">Renewable Diesel (R20 and above)</option>
+                        <label for="fuelTypeDropdown">Select Fuel Type:</label>
+                        <select id="fuelTypeDropdown" onchange="updateChart()">
+                            <option value="">All</option>
+                            @foreach (var fuelType in ViewBag.FuelTypes)
+                            {
+                                <option value="@fuelType">@fuelType</option>
+                            }
                         </select>
                     </div>
                 </div>
@@ -196,7 +192,7 @@
                         <div id="chart-loading" class="text-center">
                             <i class="fas fa-spinner fa-spin"></i> Loading the chart...
                         </div>
-                        <canvas id="stateStationsChart" class="chart"></canvas>
+                        <canvas id="stationsChart" class="chart"></canvas>
                     </div>
                 </div>
             </div>

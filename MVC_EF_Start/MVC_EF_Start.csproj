@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Create.cshtml" />
+    <Content Remove="wwwroot\Create.cshtml.cs" />
+    <Content Remove="wwwroot\favicon.ico" />
+    <Content Remove="wwwroot\Search1.html" />
+    <Content Remove="wwwroot\SubmitNewStation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\lib\" />

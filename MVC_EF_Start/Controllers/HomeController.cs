@@ -157,12 +157,15 @@ namespace MVC_EF_Start.Controllers
                 .OrderByDescending(s => s.Date_Updated)
                 .Take(10)
                 .ToList();
+            var fuelTypes = dbContext.Fuel_Stations.Select(s => s.fuel_type_code).Distinct().ToList();
+            ViewBag.FuelTypes = fuelTypes;
             return View(Stations_latest);
 
         }
         [HttpGet]
         public IActionResult Create()
         {
+            
             return View();
         }
 
@@ -222,6 +225,21 @@ namespace MVC_EF_Start.Controllers
 
             return regex.IsMatch(zipCode);
         }
+        public IActionResult StationsPerStateChart()
+        {
+            var stationsPerState = dbContext.Fuel_Stations
+                .GroupBy(s => s.state)
+                .Select(g => new { State = g.Key, Count = g.Count() })
+                .ToList();
 
+            // Convert the data to a format suitable for a bar chart
+            var labels = stationsPerState.Select(s => s.State).ToArray();
+            var data = stationsPerState.Select(s => s.Count).ToArray();
+
+            ViewBag.ChartLabels = labels;
+            ViewBag.ChartData = data;
+
+            return View();
+        }
     }
 }

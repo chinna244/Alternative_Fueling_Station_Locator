@@ -60,4 +60,10 @@ namespace MVC_EF_Start.Models
     {
         public List<Stations> Stations { get; set; }
     }
+    public class StationCountByCityViewModel
+    {
+        public string State { get; set; }
+        public int StationCount { get; set; }
+        public string FuelTypeCode { get; set; }
+    }
 }
