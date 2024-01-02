@@ -208,7 +208,6 @@ function generateColors(size) {
 function generateBorderColors(size) {
     return Array.from({ length: size }, getRandomBorderColor);
 }
-<<<<<<< HEAD
 
 function updateChartByFuelType(selectedFuelType) {
   if (selectedFuelType === "all") {
@@ -245,30 +244,3 @@ function deleteStation(stationId) {
     });
 }
 
-var ctx = document.getElementById('stationsChart').getContext('2d');
-
-var labels = @Json.Serialize(ViewBag.ChartLabels);
-var data = @Json.Serialize(ViewBag.ChartData);
-
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: labels,
-        datasets: [{
-            label: 'Number of Stations',
-            data: data,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-=======
->>>>>>> ffe3ff5a0707f8ecaf4610a9e69eac90ae15b257

@@ -63,20 +63,16 @@ namespace MVC_EF_Start.Models
         public List<FuelType> FuelTypes { get; set; }
 
     }
-<<<<<<< HEAD
     public class StationCountByCityViewModel
     {
         public string State { get; set; }
         public int StationCount { get; set; }
         public string FuelTypeCode { get; set; }
     }
-}
-=======
-        public class FuelType
-        {
-            public string Code { get; set; }
-            public string Name { get; set; }
-        }
-
+    public class FuelType
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
->>>>>>> ffe3ff5a0707f8ecaf4610a9e69eac90ae15b257
+}
+        

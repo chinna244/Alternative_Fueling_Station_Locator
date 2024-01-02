@@ -177,17 +177,7 @@
         <div class="row card">
             <div class="col-md-12">
                 <div class="card">
-<<<<<<< HEAD
-                    <div class="card-body">
-                        <h5 class="card-title">Fuel Stations by State</h5>
-                        <label for="fuelTypeDropdown">Select Fuel Type:</label>
-                        <select id="fuelTypeDropdown" onchange="updateChart()">
-                            <option value="">All</option>
-                            @foreach (var fuelType in ViewBag.FuelTypes)
-                            {
-                                <option value="@fuelType">@fuelType</option>
-                            }
-=======
+                        
                     <div class="card-body text-center">
                         <h2 class="mb-4 text-center">Dashboard </h2>
                         <h5 class="card-title" style="color:cadetblue;" >Number of Fuel Stations by State</h5>
@@ -202,7 +192,6 @@
                             <option value="LNG">Liquefied Natural Gas (LNG)</option>
                             <option value="LPG">Propane (LPG)</option>
                             <option value="RD">Renewable Diesel (R20 and above)</option>
->>>>>>> ffe3ff5a0707f8ecaf4610a9e69eac90ae15b257
                         </select>
                     </div>
                 </div>
@@ -214,7 +203,7 @@
                         <div id="chart-loading" class="text-center">
                             <i class="fas fa-spinner fa-spin"></i> Loading the chart...
                         </div>
-                        <canvas id="stationsChart" class="chart"></canvas>
+                        <canvas id="stateStationsChart" class="chart"></canvas>
                     </div>
                 </div>
             </div>
