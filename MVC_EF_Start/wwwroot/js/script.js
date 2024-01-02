@@ -209,16 +209,6 @@ function generateBorderColors(size) {
     return Array.from({ length: size }, getRandomBorderColor);
 }
 
-function updateChartByFuelType(selectedFuelType) {
-  if (selectedFuelType === "all") {
-    // Display all data
-    createFilteredStateStationsChart(originalData);
-  } else {
-    // Filter data by the selected fuel type
-    const filteredData = originalData.fuel_stations.filter(station => station.fuel_type_code === selectedFuelType);
-    createFilteredStateStationsChart({ fuel_stations: filteredData });
-  }
-}
 
 function deleteStation(stationId) {
 
