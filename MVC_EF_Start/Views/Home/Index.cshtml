@@ -11,6 +11,9 @@
             </script>
         }
     }*@
+@{
+    int recordCounter = 0;
+}
 
 
 <!DOCTYPE html>
@@ -22,14 +25,13 @@
     <meta name="description" content="This website helps you find alternative fuel stations near your location or along a route">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/style.css"> <!-- Link to your external CSS file -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        function deleteStation(stationId) {
+    <script>function deleteStation(stationId) {
 
             $.ajax({
                 url: "/Home/DeleteStation",
@@ -52,10 +54,10 @@
                     // Handle errors
                 }
             });
-        }
-    </script>
+        }</script>
 </head>
 <body>
+    <div id="stations-data" data-stations='@Html.Raw(Json.Serialize(Model.Stations))'></div>
     @if (TempData["AlertMessage"] != null)
     {
         <script>
@@ -121,31 +123,33 @@
                         You can find more information and documentation about this API on the Data.gov
                     </p>
                     <label for="start-button">Click here to start searching:</label>
-                    <button id="start-button" type="button" class="btn btn-secondary">
+                    <button id="start-button" type="button" class="btn btn-secondary" href="/Search.html">
                         Start Searching<i class="fas fa-search px-md-2 px-1"></i>
                     </button>
                 </div>
             </div>
         </div>
     </main>
-    <div class="container-fluid bg-white text-center" style="margin-top:auto;">
-            <div class="card-body">
-                <h2 class="mb-4">Latest Created & Updated Fuel Stations</h2>
+        <div class="container-fluid bg-white text-center" style="margin-top:50px; width:100%;">
+        <div class="card-body">
+            <h2 class="mb-4">Latest Created / Updated Fuel Stations</h2>
 
-                <table class="table">
-                    <thead>
-                        <tr style="color:cadetblue;">
-                            <th>NAME</th>
-                            <th>PHONE</th>
-                            <th>CITY</th>
-                            <th>STATE</th>
-                            <th>ZIP CODE</th>
-                            <th>FUEL TYPE</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var station in Model.Stations)
+            <table class="table">
+                <thead>
+                    <tr style="color:cadetblue;">
+                        <th>NAME</th>
+                        <th>PHONE</th>
+                        <th>CITY</th>
+                        <th>STATE</th>
+                        <th>ZIP CODE</th>
+                        <th>FUEL TYPE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var station in Model.Stations)
+                    {
+                        if (recordCounter < 10)
                         {
                             <tr>
                                 <td style="text-transform: uppercase; font-size: smaller;">@station.station_name</td>
@@ -160,18 +164,20 @@
                                     <button class="btn btn-danger" onclick="deleteStation(@station.station_id)">Delete</button>
                                 </td>
                             </tr>
+
+                            recordCounter++;
                         }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
+    </div>
 
-
-
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid" style="margin-top:50px;">
+        <div class="row card">
             <div class="col-md-12">
                 <div class="card">
+<<<<<<< HEAD
                     <div class="card-body">
                         <h5 class="card-title">Fuel Stations by State</h5>
                         <label for="fuelTypeDropdown">Select Fuel Type:</label>
@@ -181,6 +187,22 @@
                             {
                                 <option value="@fuelType">@fuelType</option>
                             }
+=======
+                    <div class="card-body text-center">
+                        <h2 class="mb-4 text-center">Dashboard </h2>
+                        <h5 class="card-title" style="color:cadetblue;" >Number of Fuel Stations by State</h5>
+                        <label for="fuelTypeSelect">Select Fuel Type:</label>
+                        <select id="fuelTypeSelect" class="form-select">
+                            <option value="all">All Fuels</option>
+                            <option value="BD">Biodiesel (B20 and above)</option>
+                            <option value="CNG">Compressed Natural Gas (CNG)</option>
+                            <option value="ELEC">Electric</option>
+                            <option value="E85">Ethanol (E85)</option>
+                            <option value="HY">Hydrogen</option>
+                            <option value="LNG">Liquefied Natural Gas (LNG)</option>
+                            <option value="LPG">Propane (LPG)</option>
+                            <option value="RD">Renewable Diesel (R20 and above)</option>
+>>>>>>> ffe3ff5a0707f8ecaf4610a9e69eac90ae15b257
                         </select>
                     </div>
                 </div>
@@ -199,7 +221,7 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="~/js/script.js"></script>
 
     <!-- Link to your external JavaScript file -->
 </body>
